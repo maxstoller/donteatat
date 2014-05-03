@@ -14,8 +14,6 @@ class PagesController < ApplicationController
   def receive
     head :ok
 
-    if params[:secret] == KEYS[:foursquare][:push_secret]
-      print '.'
-    end
+    raise params.inspect
   end
 end
