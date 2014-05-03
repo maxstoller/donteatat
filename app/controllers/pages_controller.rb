@@ -14,6 +14,6 @@ class PagesController < ApplicationController
   def receive
     head :ok
 
-    raise params.inspect
+    puts params.inspect
   end
 end
