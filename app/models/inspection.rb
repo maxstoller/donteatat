@@ -1,7 +1,8 @@
 class Inspection < ActiveRecord::Base
   before_create :clean_data
+  after_create :standardize_address
 
-  BOROUGHS = %w(Manhattan The Bronx Brooklyn Queens Staten\ Island')
+  BOROUGHS = %w(Manhattan The\ Bronx Brooklyn Queens Staten\ Island')
 
   def self.create_or_update_from_row_if_newer(row)
     if existing = Inspection.find_by_camis(row[0])
@@ -41,4 +42,13 @@ class Inspection < ActiveRecord::Base
       self.send("#{attribute}=", value)
     end
   end
+
+  def standardize_address
+    query = "#{building} #{street} #{borough}, ny #{zip_code}"
+    result = Geocoder.search(query)
+    self.standardized_address = result.first.address unless result.emtpy?
+
+    save
+  end
+  handle_asynchronously :standardize_address
 end
