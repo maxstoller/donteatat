@@ -43,3 +43,4 @@ gem 'delayed_job_active_record'
 gem 'rubyzip'
 gem 'geocoder'
 gem 'quimby'
+gem 'rails_serve_static_assets', group: [:production]
