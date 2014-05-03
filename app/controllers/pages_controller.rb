@@ -1,4 +1,6 @@
 class PagesController < ApplicationController
+  skip_before_action :verify_authenticity_token, only: [:receive]
+
   def callback
     url = "https://foursquare.com/oauth2/access_token" +
       "?client_id=#{KEYS[:foursquare][:client_id]}" +
