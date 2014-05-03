@@ -1,8 +1,8 @@
 class User < ActiveRecord::Base
   def self.create_from_access_token(access_token)
-    url = "https://api.foursquare.com/v2/users/self
-      ?oauth_token=#{access_token}
-      &v=20140503"
+    url = "https://api.foursquare.com/v2/users/self" +
+      "?oauth_token=#{access_token}" +
+      "&v=20140503"
     response      = HTTParty.get(url).parsed_response['response']
     foursquare_id = response['user']['id']
     phone_number  = response['user']['contact']['phone']
