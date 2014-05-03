@@ -46,7 +46,7 @@ class Inspection < ActiveRecord::Base
   def standardize_address
     query = "#{building} #{street} #{borough}, ny #{zip_code}"
     result = Geocoder.search(query)
-    self.standardized_address = result.first.address unless result.emtpy?
+    self.standardized_address = result.first.address unless result.empty?
 
     save
   end
