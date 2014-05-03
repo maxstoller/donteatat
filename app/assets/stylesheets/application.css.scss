@@ -1,0 +1,35 @@
+/*
+ *= require_self
+ *= require_tree .
+*/
+
+html {
+  background: url(image-path('background.jpg')) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.container {
+  width: 500px;
+  padding: 40px;
+  background-color: rgba(0,0,0,.9);
+  color: #fff;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  -moz-box-shadow: 5px 5px 5px #000;
+  -webkit-box-shadow: 0px 2px 5px rgba(0,0,0,.3);
+  box-shadow: 5px 5px 5px #000;
+  font: 16px/24px "Helvetica Neue", Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif;
+  img {display: block;}
+}
+
+a {color:#f4e900; text-decoration: none;}
+a:hover {text-decoration: underline;}
+h1 {text-transform: uppercase; font-size: 48px;}
+hr {margin-bottom: 30px; margin-top: 30px; border-top: 1px dashed rgba(255,255,255,.3); border-bottom: 0; border-left: 0; border-right: 0; height: 1px;}
+p {margin-bottom: 25px;}
+
+.twitter {margin: 0px auto; display: block;}
+.about {margin-right: 20px;}
