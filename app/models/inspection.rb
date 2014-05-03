@@ -31,6 +31,10 @@ class Inspection < ActiveRecord::Base
     save
   end
 
+  def failed?
+    score >= 28
+  end
+
   private
 
   def clean_data
