@@ -10,4 +10,12 @@ class PagesController < ApplicationController
 
     User.create_from_access_token(response['access_token'])
   end
+
+  def receive
+    render nothing: true
+
+    if params['secret'] == KEYS[:foursquare][:push_secret]
+      print '.'
+    end
+  end
 end
