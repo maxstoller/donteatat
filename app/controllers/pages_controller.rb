@@ -12,9 +12,9 @@ class PagesController < ApplicationController
   end
 
   def receive
-    render nothing: true
+    head :ok
 
-    if params['secret'] == KEYS[:foursquare][:push_secret]
+    if params[:secret] == KEYS[:foursquare][:push_secret]
       print '.'
     end
   end
