@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get   '/about'       => 'pages#about'
   get   '/callback'    => 'pages#callback'
   get   '/privacy'     => 'pages#privacy'
-  match '/delayed_job' => DelayedJobWeb, :anchor => false, via: [:get, :post]
+  # match '/delayed_job' => DelayedJobWeb, :anchor => false, via: [:get, :post]
 
   root to: 'pages#index'
 end
