@@ -14,8 +14,10 @@ class PagesController < ApplicationController
   end
 
   def receive
-    head :ok
+    if params['secret'] == KEYS['foursquare']['push_secret']
+      Delayed::Job.enqueue(CheckinJob.new(JSON.parse(params[:checkin])))
+    end
 
-    puts params.inspect
+    head :ok
   end
 end

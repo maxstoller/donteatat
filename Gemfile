@@ -44,3 +44,5 @@ gem 'rubyzip'
 gem 'geocoder'
 gem 'rails_serve_static_assets', group: [:production]
 gem 'httparty'
+gem 'twilio-ruby'
+gem 'delayed_job_web'
