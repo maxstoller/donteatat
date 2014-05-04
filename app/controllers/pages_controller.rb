@@ -14,9 +14,7 @@ class PagesController < ApplicationController
   end
 
   def receive
-    if params['secret'] == KEYS['foursquare']['push_secret']
-      Delayed::Job.enqueue(CheckinJob.new(JSON.parse(params[:checkin])))
-    end
+    Delayed::Job.enqueue(CheckinJob.new(JSON.parse(params[:checkin])))
 
     head :ok
   end
