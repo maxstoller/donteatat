@@ -13,6 +13,9 @@ if Rails.env == 'production'
   KEYS[:twilio][:auth_token] = ENV['TWILIO_AUTH_TOKEN']
 
   KEYS[:dj] = ENV['DJ_PASSWORD']
+
+  KEYS[:newrelic] = {}
+  KEYS[:newrelic][:license_key] = ENV['NEW_RELIC_LICENSE_KEY']
 else
   KEYS = HashWithIndifferentAccess.new(YAML.load_file("#{Rails.root}/config/keys.yml"))
 end
