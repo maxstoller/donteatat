@@ -13,8 +13,8 @@ class CheckinJob < Struct.new(:checkin)
     venue  = checkin['venue']
     dba    = venue['name'].strip.downcase.gsub("'", '')
     client = Twilio::REST::Client.new(
-      KEYS['twilio']['account_sid'],
-      KEYS['twilio']['auth_token']
+      KEYS[:twilio][:account_sid],
+      KEYS[:twilio][:auth_token]
     )
 
     query = "#{venue['location']['address']} " +
