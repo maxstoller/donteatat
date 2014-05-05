@@ -24,7 +24,7 @@ class Inspection < ActiveRecord::Base
     end
   end
 
-  def update_data_and_score(date, score)
+  def update_date_and_score(date, score)
     self.date = date
     self.score = score
 
