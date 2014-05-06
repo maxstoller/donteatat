@@ -33,7 +33,7 @@ class CheckinJob < Struct.new(:checkin)
     )
 
     message = "Heads up! #{venue['name']} received #{inspection.score} violation " +
-              "points on its #{inspection.date.strftime('%-m/%-d')} inspection." +
+              "points on its #{inspection.date.strftime('%-m/%-d')} inspection. " +
               "That's not good. Love, DontEat.at."
     client.account.messages.create(
       from: '+15166287713',
