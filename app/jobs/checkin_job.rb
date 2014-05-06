@@ -7,7 +7,7 @@ class CheckinJob < Struct.new(:checkin)
 
   def perform
     return false unless valid_ny_checkin?(checkin)
-    return false if User.find_by_foursquare_id(checkin['user']['id']).nil?
+    # return false if User.find_by_foursquare_id(checkin['user']['id']).nil?
 
     user   = checkin['user']
     venue  = checkin['venue']
@@ -27,7 +27,8 @@ class CheckinJob < Struct.new(:checkin)
 
     if inspection = Inspection.find_by_dba_and_standardized_address(dba, standardized_address)
       if inspection.failed?
-        message = "Heads up! #{venue['name']} has #{inspection.score} violation points. " +
+        message = "Heads up! #{venue['name']} received #{inspection.score} violation " +
+                  "points on its #{inspection.date.strftime('%-m/%-d')} inspection." +
                   "That's not good. Love, DontEat.at."
         client.account.messages.create(
           from: '+15166287713',
