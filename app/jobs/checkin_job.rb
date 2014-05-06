@@ -12,10 +12,6 @@ class CheckinJob < Struct.new(:checkin)
     user   = checkin['user']
     venue  = checkin['venue']
     dba    = venue['name'].strip.downcase.gsub("'", '')
-    client = Twilio::REST::Client.new(
-      KEYS[:twilio][:account_sid],
-      KEYS[:twilio][:auth_token]
-    )
 
     query = "#{venue['location']['address']} " +
             "#{venue['location']['city']}, " +
@@ -26,16 +22,23 @@ class CheckinJob < Struct.new(:checkin)
     standardized_address = result.first.address
 
     if inspection = Inspection.find_by_dba_and_standardized_address(dba, standardized_address)
-      if inspection.failed?
-        message = "Heads up! #{venue['name']} received #{inspection.score} violation " +
-                  "points on its #{inspection.date.strftime('%-m/%-d')} inspection." +
-                  "That's not good. Love, DontEat.at."
-        client.account.messages.create(
-          from: '+15166287713',
-          to:   "+1#{user['contact']['phone']}",
-          body: message
-        )
-      end
+      send_text_message(inspection, venue, user['contact']['phone']) if inspection.failed?
     end
+  end
+
+  def send_text_message(inspection, venue, phone_number)
+    client = Twilio::REST::Client.new(
+      KEYS[:twilio][:account_sid],
+      KEYS[:twilio][:auth_token]
+    )
+
+    message = "Heads up! #{venue['name']} received #{inspection.score} violation " +
+              "points on its #{inspection.date.strftime('%-m/%-d')} inspection." +
+              "That's not good. Love, DontEat.at."
+    client.account.messages.create(
+      from: '+15166287713',
+      to:   "+1#{phone_number}",
+      body: message
+    )
   end
 end
